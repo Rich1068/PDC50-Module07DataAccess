@@ -12,7 +12,7 @@ namespace Module07DataAccess.Services
 
         public DatabaseConnectionService() 
         {
-            _connectionString = "Server=localhost;Database=testdb;User ID=testuser;password=testuser";
+            _connectionString = "Server=localhost;Database=companydb;User ID=testuser;password=testuser";
         }
         public string GetConnectionString()
         {

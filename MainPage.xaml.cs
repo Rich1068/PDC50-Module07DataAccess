@@ -6,7 +6,6 @@ namespace Module07DataAccess
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         private readonly DatabaseConnectionService _dbConnectionService;
 
@@ -18,17 +17,7 @@ namespace Module07DataAccess
             _dbConnectionService = new DatabaseConnectionService();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+       
 
         private async void OnTestConnectionClicked(object sender, EventArgs e)
         {
