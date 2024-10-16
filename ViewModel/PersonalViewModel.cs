@@ -56,20 +56,14 @@ namespace Module07DataAccess.ViewModel
         {
             if (IsBusy) return;
             IsBusy = true;
-            StatusMessage = "Loading Employee Data...";
+            StatusMessage = "Loading Personal Data...";
             try
             {
                 var personals = await _personalService.GetAllPersonalsAsync();
                 PersonalList.Clear();
                 foreach (var personal in personals)
                 {
-
-                    var displayPersonal = new Personal
-                    {
-                        Name = personal.Name,
-                        FullInfo = $"Address: {personal.Address}, Email: {personal.email}, Contact No: {personal.ContactNo}"
-                    };
-                    PersonalList.Add(displayPersonal);
+                    PersonalList.Add(personal);
                 }
                 StatusMessage = "Data Loaded successfully";
             }

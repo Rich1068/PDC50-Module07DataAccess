@@ -27,17 +27,16 @@ namespace Module07DataAccess.Services
                 await conn.OpenAsync();
 
                 //retrieve data
-                var cmd = new MySqlCommand("SELECT * FROM tblEmployee", conn);
+                var cmd = new MySqlCommand("SELECT * FROM tblPersonal", conn);
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
                     {
                         personalService.Add(new Personal
                         {
-                            EmployeeId = reader.GetInt32("EmployeeId"),
+                            Id = reader.GetInt32("ID"),
                             Name = reader.GetString("Name"),
-                            Address = reader.GetString("Address"),
-                            email = reader.GetString("email"),
+                            Gender = reader.GetString("Gender"),
                             ContactNo = reader.GetString("ContactNo")
                         });
                     }
