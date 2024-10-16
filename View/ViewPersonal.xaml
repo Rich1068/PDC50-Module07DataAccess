@@ -11,7 +11,7 @@
                Margin="0,10,0,20"/>
 
         <!-- Frame container for the entire ListView -->
-        <Frame BackgroundColor="DarkBlue"
+        <Frame BackgroundColor="#324266"
                BorderColor="#CCCCCC"
                CornerRadius="10"
                HasShadow="True"
