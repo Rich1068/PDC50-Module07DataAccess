@@ -54,13 +54,13 @@
                 TextColor="White"
                 CornerRadius="5"
                 Margin="0,20,0,10"/>
-            <Button Text="Add Person" Command="{Binding AddPersonalCommand}"                 
+            <Button Text="Add Employee" Command="{Binding AddPersonalCommand}"                 
                 HorizontalOptions="Center" 
                 BackgroundColor="#6200EE" 
                 TextColor="White"
                 CornerRadius="5"
                 Margin="0,20,0,10"/>
-            <Button Text="DeletePerson" Command="{Binding DeletePersonCommand}" IsEnabled="{Binding IsPersonSelected}"
+            <Button Text="Delete Employee" Command="{Binding DeletePersonCommand}" IsEnabled="{Binding IsPersonSelected}"
                 HorizontalOptions="Center" 
                 BackgroundColor="#6200EE" 
                 TextColor="White"
