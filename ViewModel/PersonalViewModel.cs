@@ -150,7 +150,11 @@ namespace Module07DataAccess.ViewModel
             {
                 StatusMessage = $"Failed adding person: {ex.Message}";
             }
-            finally { IsBusy = false; } 
+            finally 
+            { 
+                IsBusy = false; 
+                await LoadData();
+            } 
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
