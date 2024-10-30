@@ -66,5 +66,24 @@ namespace Module07DataAccess.Services
                 return false;
             }
         }
+        public async Task<bool> DeletePersonalAsync(int id)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(_connectionString))
+                {
+                    await conn.OpenAsync();
+                    var cmd = new MySqlCommand("DELETE FROM tblPersonal WHERE ID=@Id", conn);
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    var result = await cmd.ExecuteNonQueryAsync();
+                    return result > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error Deleting Personal Record: {ex.Message}");
+                return false;
+            }
+        }
     }
 }

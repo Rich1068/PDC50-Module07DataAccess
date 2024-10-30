@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 //added
+using Module07DataAccess.ViewModel;
 using Module07DataAccess.Model;
 using Module07DataAccess.Services;
 using System.Collections.ObjectModel;
@@ -29,6 +30,38 @@ namespace Module07DataAccess.ViewModel
                 OnPropertyChanged();
             }
         }
+        private Personal _selectedPersonal;
+        public Personal SelectedPersonal
+        {
+            get => _selectedPersonal;
+            set
+            {
+                _selectedPersonal = value;
+                if (_selectedPersonal != null)
+                {
+                    NewPersonalName = _selectedPersonal.Name;
+                    NewPersonalGender = _selectedPersonal.Gender;
+                    NewPersonalContactNo = _selectedPersonal.ContactNo;
+                    IsPersonSelected = true;
+                }
+                else
+                {
+                    IsPersonSelected = false;
+                }
+                OnPropertyChanged();
+            }
+        }
+        private bool _isPersonSelected;
+        public bool IsPersonSelected
+        {
+            get => _isPersonSelected;
+            set
+            {
+                _isPersonSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _statusMessage;
         public string StatusMessage
         {
@@ -77,6 +110,10 @@ namespace Module07DataAccess.ViewModel
 
         public ICommand AddPersonalCommand { get; }
 
+        public ICommand SelectedPersonCommand { get; }
+
+        public ICommand DeletePersonCommand { get; }
+
         //PersonlViewModel Constructor
 
         public PersonalViewModel()
@@ -85,6 +122,8 @@ namespace Module07DataAccess.ViewModel
             PersonalList = new ObservableCollection<Personal>();
             LoadDataCommand = new Command(async () => await LoadData());
             AddPersonalCommand = new Command(async () => await AddPerson());
+            SelectedPersonCommand = new Command<Personal>(person => SelectedPersonal = person);
+            DeletePersonCommand = new Command(async () => await DeletePersonal(), () => SelectedPersonal != null); 
             LoadData();
 
         }
@@ -155,6 +194,35 @@ namespace Module07DataAccess.ViewModel
                 IsBusy = false; 
                 await LoadData();
             } 
+        }
+
+        private async Task DeletePersonal()
+        {
+            if (SelectedPersonal == null) return;
+            var answer = await Application.Current.MainPage.DisplayAlert("Confirm Delete", $"Are you sure you want to delete {SelectedPersonal.Name}?", "Yes", "No");
+            if (!answer) return;
+            IsBusy = true;
+            StatusMessage = "Deleting Person";
+            try
+            {
+                var success = await _personalService.DeletePersonalAsync(SelectedPersonal.Id);
+                StatusMessage = success ? "Person deleted successfully" : "Failed to delete person";
+                if (success)
+                {
+                    PersonalList.Remove(SelectedPersonal);
+                    SelectedPersonal = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error deleting person: {ex.Message}";
+            }
+            finally
+            {
+                IsBusy = false;
+                await LoadData();
+            }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
