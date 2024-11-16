@@ -87,5 +87,32 @@ namespace Module07DataAccess.Services
                 return false;
             }
         }
+        ///new stuff///
+        public async Task<bool> UpdatePersonalAsync(Personal updatedPerson)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(_connectionString))
+                {
+                    await conn.OpenAsync();
+                    var cmd = new MySqlCommand(
+                        "UPDATE tblemployee SET Name = @Name, Address = @Address, email = @email, ContactNo = @ContactNo WHERE EmployeeId = @ID",
+                        conn);
+                    cmd.Parameters.AddWithValue("@Name", updatedPerson.Name);
+                    cmd.Parameters.AddWithValue("@Address", updatedPerson.Address);
+                    cmd.Parameters.AddWithValue("@email", updatedPerson.email);
+                    cmd.Parameters.AddWithValue("@ContactNo", updatedPerson.ContactNo);
+                    cmd.Parameters.AddWithValue("@ID", updatedPerson.EmployeeId);
+
+                    var result = await cmd.ExecuteNonQueryAsync();
+                    return result > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating personal record: {ex.Message}");
+                return false;
+            }
+        }
     }
 }

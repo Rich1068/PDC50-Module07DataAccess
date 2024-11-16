@@ -28,8 +28,8 @@ namespace Module07DataAccess
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-                    ConnectionStatusLabel.Text = "Connection Succesful";
-                    ConnectionStatusLabel.TextColor = Colors.Green;
+                    ConnectionStatusLabel.Text = "Connection Successful";
+                    ConnectionStatusLabel.TextColor = Color.FromArgb("#4CAF50");
                 }
             }
             catch (Exception ex)

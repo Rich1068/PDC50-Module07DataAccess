@@ -1,45 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Module07DataAccess.MainPage">
+             x:Class="Module07DataAccess.MainPage"
+             BackgroundColor="#1E1E2F">
 
     <ScrollView>
         <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+            Padding="30,50"
+            Spacing="20"
+            HorizontalOptions="Center">
+
+            <!-- Employee Image -->
             <Image
                 Source="Employee.png"
-                HeightRequest="185"
+                HeightRequest="150"
                 Aspect="AspectFit"
-                SemanticProperties.Description="employee" />
+                SemanticProperties.Description="Employee Icon"
+                Margin="0,0,0,20"/>
 
+            <!-- Greeting Section -->
             <Label
                 Text="Hello, User!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="#FFFFFF"
+                HorizontalOptions="Center"/>
 
             <Label
                 Text="Welcome to Employee List!"
-                Style="{StaticResource SubHeadline}"
+                FontSize="18"
+                TextColor="#A9A9A9"
+                HorizontalOptions="Center"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                SemanticProperties.Description="Welcome to .NET Multi-platform App UI"
+                Margin="0,0,0,20"/>
+
+            <!-- Connection Status -->
             <Label
                 x:Name="ConnectionStatusLabel"
                 Text=""
-                FontSize="18"
-                TextColor="Red"
-                HorizontalOptions="Center"/>
+                FontSize="30"
+                TextColor="#FF5252"
+                HorizontalOptions="Center"
+                Margin="0,10,0,20"/>
 
+            <!-- Action Buttons -->
             <Button 
                 Text="Test Connection"
                 Clicked="OnTestConnectionClicked"
-                HorizontalOptions="Center"/>
+                BackgroundColor="#4CAF50"
+                TextColor="White"
+                FontSize="18"
+                Padding="10"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                WidthRequest="200"/>
 
             <Button
-                Text="Go to ViewPersonal page"
+                Text="Go to Employee List"
                 Clicked="OpenViewPersonal"
-                HorizontalOptions="Center"/>
+                BackgroundColor="#2196F3"
+                TextColor="White"
+                FontSize="18"
+                Padding="10"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                WidthRequest="200"/>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
